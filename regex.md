@@ -160,9 +160,10 @@ console.log(newstr);
 The (\w+) matches and stores a pattern of alphanumeric characters up until a white space or the end of string. So $1 = "John" and $2 = "Smith".  Therefore the `newstr` replaces any occurance of "John Smith" with "$2, $1" (or "Smith, John"). So console log will print "Smith, John".
 
 ### Using Lookahead
-
-| (?=foo)	| Lookahead	  | Asserts that what immediately follows the current position in the string is foo
-| (?<=foo)	| Lookbehin   | Asserts that what immediately precedes the current position in the string is foo
+| Symbol 	| Definition    	| Description																		|
+|-----------|-------------------|-----------------------------------------------------------------------------------|
+| (?=foo)	| Lookahead	  		| Asserts that what immediately follows the current position in the string is foo 	|
+| (?<=foo)	| Lookbehin   		| Asserts that what immediately precedes the current position in the string is foo 	|
 
 
 ## Regex Tester
