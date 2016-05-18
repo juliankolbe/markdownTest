@@ -15,6 +15,8 @@ The important thing to understand about lookaheads is that at the end of a looka
 
 This will all become clear in the following example where we will perform a simple password validation with just one line of regex, instead of many lines of javascript.
 
+_Note: whenever the [rexex style guide](http://www.rexegg.com/regex-style.html) is mentioned it is referring to the one from rexegg.com._
+
 ######Password requirements:
 
 1. The Password must have between 6 and 10 word characters. `\w`
@@ -25,29 +27,29 @@ This will all become clear in the following example where we will perform a simp
 
 ######Starting with the first requirement
 
-A string made up of 6 to 10 characters can be written like this `^\w{6,10}$`.
+A string made up of 6 to 10 characters can be written like this `^\w{6,10}$`. Start at the beginning of the string `^`, match any word character 6 to 10 times `\w{6,10}` and make sure your at the end of the string `$`.
 
-Within a lookahead the pattern becomes `(?=^\w{6,10}$)` we will however move the `^` to the beginning of the pattern in order not to duplicate it for every lookahead.
+Within a lookahead the pattern becomes `(?=^\w{6,10}$)`, we will however move the `^` to the beginning of the pattern in order not to duplicate it for every lookahead.
 
 `^(?=\w{6,10}$)`
 
-This expression validates that a string is 6 to 12 characters, however does not match anything yet, we have only looked ahead and come back to the beginning of the string.
+This expression validates that a string is 6 to 12 characters, it does however not match anything yet, we have only looked ahead and come back to the beginning of the string.
 
 ######Second Requirement
 
 We now have to check whether the password contains a lowercase letter. The easy way to check this would be to use `(?=.*[a-z])`, this is however inefficient due to backtracking.
 
-Instead we will use an expression that makes use of the principle of contrast recommended by the regex style guide. The expression looks like this `[^a-z]*[a-z]`.
-`[^a-z]` as you should know is the counterclass to `[a-z]`. So the expressions above is saying: match 0 or more non lowercase letters and one lowercase letter. The pattern becomes:
+Instead we will use an expression that makes use of the principle of contrast recommended by the regex style guide. The expression looks like this `[^a-z]*[a-z]`,
+`[^a-z]` is the counterclass to `[a-z]`. So the expression above is saying: match 0 or more non lowercase letters and one lowercase letter. The pattern becomes:
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])`
 
 ######Third Requirement
 
-The third condition is similar to the second, however with the added difficulty of repeating the uppercase check 3 times.
+The third requirement is similar to the second, however with the added difficulty of repeating the uppercase check 3 times.
 
-We will do this using the quantifier `{3}`
-The lookahead will look like this: `(?=(?:[^A-Z]*[A-Z]){3})`
+We will do this using the quantifier `{3}`.
+The lookahead will look like this: `(?=(?:[^A-Z]*[A-Z]){3})`.
 _Note: `(:?)` means non capturing group, it is similar to `()`, just that it does not return the capture in the results._
 
 So this lookahead will do the following three times: match zero or more characters that are not uppercase letters `[^A-Z]*`, then match one uppercase letter `[A-Z]`. The pattern becomes:
@@ -64,7 +66,7 @@ Now we have made sure the password is valid, and if that is all we wanted we can
 
 ######Matching the string
 
-A simple `.*` would suffice to capture the entire string, which as we have asserted, matches all of our criteria. The pattern becomes: 
+A simple `.*` would suffice to capture the entire string which, as we have asserted with out lookups, matches all of our criteria. The pattern becomes: 
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d).*`
 
