@@ -6,10 +6,10 @@
 | (?=foo)	| Lookahead	  				| Asserts that what immediately follows the current position in the string is foo 		|
 | (?!foo)	| Negative Lookahead   		| Asserts that what immediately follows the current position in the string is not foo 	|
 
-This is a summerized version from the [Mastering Lookahead and Lookbehind article](http://www.rexegg.com/regex-lookarounds.html) on rexegg.com.
+_This is a summerized version from the [Mastering Lookahead and Lookbehind article](http://www.rexegg.com/regex-lookarounds.html) on rexegg.com._
 
 
-Lookaheads in regex can get easily confusing in the beginning, they are however useful for several purposes, including simple string validation.
+Lookaheads in regex is a bit more advanced and can get easily confusing in the beginning, they are however useful for several purposes, including simple string validation. So if you have not used regex at all yet, i advise that you play around with the basics first.
 
 The important thing to understand about lookaheads is that at the end of a lookahead, the regex engine has not changed its position in the string. This makes it possible to chain several lookaheads, one after the other without changing position.
 
@@ -75,6 +75,20 @@ However to make the pattern even more efficient we can use one of the patterns f
 This shows that when checking for n conditions we only need n-1 lookaheads at the most, often you can combine several conditions into a single lookahead.
 
 One last thing to note is that, while the order of the lookaheads will not change the result, it is more efficient to use those lookaheads first that are most likely to fail. This makes use of the design to fail principle from the regex style guide.
+
+######Example In javascript
+
+```javascript
+var valid = "VaLiD123";
+var invalid = "invalidPassword";
+var regex = /^(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)\w{6,10}$/;
+
+console.log(regex.test(valid));
+// Outputs: true
+console.log(regex.test(invalid));
+// Outputs: false
+
+```
 
 
 
