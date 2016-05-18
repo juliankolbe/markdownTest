@@ -33,7 +33,7 @@ Within a lookahead the pattern becomes `(?=^\w{6,10}$)`, we will however move th
 
 `^(?=\w{6,10}$)`
 
-This expression validates that a string is 6 to 12 characters, it does however not match anything yet, we have only looked ahead and come back to the beginning of the string.
+This expression validates that a string is 6 to 10 characters, it does however not match anything yet, we have only looked ahead and come back to the beginning of the string.
 
 ######Second Requirement
 
