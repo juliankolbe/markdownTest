@@ -25,6 +25,7 @@ This will all become clear in the following example where we will perform a simp
 A string made up of 6 to 10 characters can be written like this `^\w{6,10}$`.
 
 Within a lookahead the pattern becomes `(?=^\w{6,10}$)` we will however move the `^` to the beginning of the pattern in order not to duplicate it for every lookahead.
+
 `^(?=\w{6,10}$)`
 
 This expression validates that a string is 6 to 12 characters, however does not match anything yet, we have only looked ahead and come back to the beginning of the string.
