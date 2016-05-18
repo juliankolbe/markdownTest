@@ -12,7 +12,7 @@ The important thing to understand about lookaheads is that at the end of a looka
 
 This will all become clear in the following example where we will perform a simple password validation with just one line of regex, instead of many lines of javascript.
 
-**Password requirements:**
+######Password requirements:
 
 1. The Password must have between 6 and 10 word characters. `\w`
 2. It has to contain at least one lowercase character. `[a-z]`
@@ -20,7 +20,7 @@ This will all become clear in the following example where we will perform a simp
 4. It has to contain at least one digit. `\d`
 
 
-**Starting with the first requirement**
+######Starting with the first requirement
 
 A string made up of 6 to 10 characters can be written like this `^\w{6,10}$`.
 
@@ -29,7 +29,7 @@ Within a lookahead the pattern becomes `(?=^\w{6,10}$)` we will however move the
 
 This expression validates that a string is 6 to 12 characters, however does not match anything yet, we have only looked ahead and come back to the beginning of the string.
 
-**Second Requirement**
+######Second Requirement
 
 We now have to check wether the password contains a lowercase letter. The easy way to check this would be to use `(?=.*[a-z])`, this is however inefficient due to backtracking (a bit too advanced for now).
 
