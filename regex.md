@@ -32,9 +32,50 @@ This expression validates that a string is 6 to 12 characters, however does not 
 
 ######Second Requirement
 
-We now have to check wether the password contains a lowercase letter. The easy way to check this would be to use `(?=.*[a-z])`, this is however inefficient due to backtracking (a bit too advanced for now).
+We now have to check whether the password contains a lowercase letter. The easy way to check this would be to use `(?=.*[a-z])`, this is however inefficient due to backtracking.
 
 Instead we will use an expression that makes use of the principle of contrast recommended by the regex style guide. The expression looks like this `[^a-z]*[a-z]`.
+`[^a-z]` as you should know is the counterclass to `[a-z]`. So the expressions above is saying: match 0 or more non lowercase letters and one lowercase letter. The pattern becomes:
+
+`^(?=\w{6,10}$)(?=[^a-z]*[a-z])`
+
+######Third Requirement
+
+The third condition is similar to the second, however with the added difficulty of repeating the uppercase check 3 times.
+
+We will do this using the quantifier `{3}`
+The lookahead will look like this: `(?=(?:[^A-Z]*[A-Z]){3})`
+_Note: `(:?)` means non capturing group, it is similar to `()`, just that it doesnt return the capture in the results._
+
+So this lookahead will do the following three times: match zero or more characters that are not uppercase letters `[^A-Z]*`, then match one uppercase letter `[A-Z]`. The pattern becomes:
+
+`^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})`
+
+######Last Requirement
+
+The last lookahead again uses the principle of contrast to check for 0 or more non digits `\D*` and one digit `\d`. `(?=\D*\d)` The pattern becomes:
+
+`^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)`
+
+Now we have made sure the password is valid, and if that is all we wanted we can stop here. However if we also wanted to match and return the string, we can easily do so now.
+
+######Matching the string
+
+A simple `.*` would suffice to capture the entire string, which as we have asserted, matches all of our criteria. The pattern becomes: 
+
+`^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d).*`
+
+However to make the pattern even more efficient we can use one of the patterns from the lookaheads to match the entire string. Which one does not matter as it can work with any, but the obvious one here would be `\w{6,10}$`, as it matches the entire string anyway. The pattern becomes: 
+
+`^(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)\w{6,10}$`
+
+This shows that when checking for n conditions we only need n-1 lookaheads at the most, often you can combine several conditions into a single lookahead.
+
+One last thing to note is that, while the order of the lookaheads will not change the result, it is more efficient to use those lookaheads first that are most likely to fail. This will ensure a performance increase with lookaheads that will fail often.
+
+
+
+
 
 
 
