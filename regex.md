@@ -16,7 +16,7 @@ This will all become clear in the following example where we will perform a simp
 
 1. The Password must have between 6 and 10 word characters. `\w`
 2. It has to contain at least one lowercase character. `[a-z]`
-3. It has to contain three uppercase characters. `[A-Z]`
+3. It has to contain three _uppercase_ characters. `[A-Z]`
 4. It has to contain at least one digit. `\d`
 
 
