@@ -6,10 +6,10 @@
 | (?=foo)	| Lookahead	  				| Asserts that what immediately follows the current position in the string is foo 		|
 | (?!foo)	| Negative Lookahead   		| Asserts that what immediately follows the current position in the string is not foo 	|
 
-_This is a summerized version from the [Mastering Lookahead and Lookbehind article](http://www.rexegg.com/regex-lookarounds.html) on rexegg.com._
+_This is a summarized version from the [Mastering Lookahead and Lookbehind](http://www.rexegg.com/regex-lookarounds.html) article on rexegg.com._
 
 
-Lookaheads in regex is a bit more advanced and can get easily confusing in the beginning, they are however useful for several purposes, including simple string validation. So if you have not used regex at all yet, i advise that you play around with the basics first.
+Lookaheads in regex is a bit more advanced and can get easily confusing in the beginning, they are however useful for several purposes, including simple string validation. So if you have not used regex at all yet, I advise that you play around with the basics first.
 
 The important thing to understand about lookaheads is that at the end of a lookahead, the regex engine has not changed its position in the string. This makes it possible to chain several lookaheads, one after the other without changing position.
 
@@ -48,7 +48,7 @@ The third condition is similar to the second, however with the added difficulty 
 
 We will do this using the quantifier `{3}`
 The lookahead will look like this: `(?=(?:[^A-Z]*[A-Z]){3})`
-_Note: `(:?)` means non capturing group, it is similar to `()`, just that it doesnt return the capture in the results._
+_Note: `(:?)` means non capturing group, it is similar to `()`, just that it does not return the capture in the results._
 
 So this lookahead will do the following three times: match zero or more characters that are not uppercase letters `[^A-Z]*`, then match one uppercase letter `[A-Z]`. The pattern becomes:
 
@@ -60,7 +60,7 @@ The last lookahead again uses the principle of contrast to check for 0 or more n
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)`
 
-Now we have made sure the password is valid, and if that is all we wanted we can stop here. However if we also wanted to match and return the string, we can easily do so now.
+Now we have made sure the password is valid, and if that is all we wanted we can stop here. However, if we also wanted to match and return the string, we can easily do so now.
 
 ######Matching the string
 
@@ -68,7 +68,7 @@ A simple `.*` would suffice to capture the entire string, which as we have asser
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d).*`
 
-However to make the pattern even more efficient we can use one of the patterns from the lookaheads to match the entire string. Which one does not matter as it can work with any, but the obvious one here would be `\w{6,10}$`, as it matches the entire string anyway. The pattern becomes: 
+However, to make the pattern even more efficient we can use one of the patterns from the lookaheads to match the entire string. Which one does not matter as it can work with any, but the obvious one here would be `\w{6,10}$`, as it matches the entire string anyway. The pattern becomes: 
 
 `^(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)\w{6,10}$`
 
