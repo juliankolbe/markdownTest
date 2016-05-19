@@ -97,11 +97,12 @@ console.log(regex.test(invalid));
 
 ######The process
 
-With 'VaLiD123' as example, let see how the lookaheads work.
+With `VaLiD123` as example, let see how the lookaheads work.
 
 `^` as we know will tell the lookahead to start at the beginning of the string.
 
-so '<mark> </mark>VaLiD123'
+so  `VaLiD123`
+	^
 
 
 
