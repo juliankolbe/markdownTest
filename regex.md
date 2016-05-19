@@ -22,9 +22,9 @@ _Note: whenever the [rexex style guide](http://www.rexegg.com/regex-style.html) 
 ######Password requirements:
 
 1. The Password must have between 6 and 10 word characters. `\w`
-2. It has to contain at least one lowercase character. `[a-z]`
-3. It has to contain **three** uppercase characters. `[A-Z]`
-4. It has to contain at least one digit. `\d`
+2. It has to contain at least 1 lowercase character. `[a-z]`
+3. It has to contain **3** uppercase characters. `[A-Z]`
+4. It has to contain at least 1 digit. `\d`
 
 
 ######Starting with the first requirement
@@ -42,7 +42,7 @@ This expression validates that a string is 6 to 10 characters, it does however n
 We now have to check whether the password contains a lowercase letter. The easy way to check this would be to use `(?=.*[a-z])`, this is however inefficient due to backtracking.
 
 Instead we will use an expression that makes use of the principle of contrast recommended by the regex style guide. The expression looks like this `[^a-z]*[a-z]`,
-`[^a-z]` is the counterclass to `[a-z]`. So the expression above is saying: from the start of the string match 0 or more non lowercase letters and one lowercase letter. The pattern becomes:
+`[^a-z]` is the counterclass to `[a-z]`. So the expression above is saying: from the start of the string match 0 or more non lowercase letters and 1 lowercase letter. The pattern becomes:
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])`
 
@@ -54,13 +54,13 @@ We will do this using the quantifier `{3}`.
 The lookahead will look like this: `(?=(?:[^A-Z]*[A-Z]){3})`.
 _Note: `(:?)` means non capturing group, it is similar to `()`, just that it does not return the capture in the results._
 
-So this lookahead will do the following three times: from the beginning of the string match zero or more characters that are not uppercase letters `[^A-Z]*`, then match one uppercase letter `[A-Z]`. The pattern becomes:
+So this lookahead will do the following 3 times: from the beginning of the string match 0 or more characters that are not uppercase letters `[^A-Z]*`, then match 1 uppercase letter `[A-Z]`. The pattern becomes:
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})`
 
 ######Last Requirement
 
-The last lookahead again uses the principle of contrast to check for 0 or more non digits `\D*` and one digit `\d`. `(?=\D*\d)` The pattern becomes:
+The last lookahead again uses the principle of contrast to check for 0 or more non digits `\D*` and 1 digit `\d`. `(?=\D*\d)` The pattern becomes:
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)`
 
