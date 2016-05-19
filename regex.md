@@ -8,6 +8,7 @@
 
 _This is a summarized version from the [Mastering Lookahead and Lookbehind](http://www.rexegg.com/regex-lookarounds.html) article on rexegg.com._
 
+#####Introduction
 
 Lookaheads in regex is a bit more advanced and can get easily confusing in the beginning, they are however useful for several purposes, including simple string validation. So if you have not used regex at all yet, I advise that you play around with the basics first.
 
@@ -19,7 +20,7 @@ We will not be using Negative Lookahead in the example, however it behaves the s
 
 _Note: whenever the [rexex style guide](http://www.rexegg.com/regex-style.html) is mentioned it is referring to the one from rexegg.com._
 
-######Password requirements:
+#####Password requirements:
 
 1. The Password must have between 6 and 10 word characters. `\w`
 2. It has to contain at least 1 lowercase character. `[a-z]`
@@ -27,7 +28,7 @@ _Note: whenever the [rexex style guide](http://www.rexegg.com/regex-style.html) 
 4. It has to contain at least 1 digit. `\d`
 
 
-######Starting with the first requirement
+#####Starting with the first requirement
 
 A string made up of 6 to 10 characters can be written like this `^\w{6,10}$`. Start at the beginning of the string `^`, match any word character 6 to 10 times `\w{6,10}` and make sure that after those 6 to 10 letters follows the end of the string `$`.
 
@@ -37,7 +38,7 @@ Within a lookahead the pattern becomes `(?=^\w{6,10}$)`, we will however move th
 
 This expression validates that a string is 6 to 10 characters, it does however not match anything yet, we have only looked ahead and come back to the beginning of the string.
 
-######Second Requirement
+#####Second Requirement
 
 We now have to check whether the password contains a lowercase letter. The easy way to check this would be to use `(?=.*[a-z])`, this is however inefficient due to backtracking.
 
@@ -46,7 +47,7 @@ Instead we will use an expression that makes use of the principle of contrast re
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])`
 
-######Third Requirement
+#####Third Requirement
 
 The third requirement is similar to the second, however with the added difficulty of repeating the uppercase check 3 times.
 
@@ -58,7 +59,7 @@ So this lookahead will do the following 3 times: from the beginning of the strin
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})`
 
-######Last Requirement
+#####Last Requirement
 
 The last lookahead again uses the principle of contrast to check for 0 or more non digits `\D*` and 1 digit `\d`. `(?=\D*\d)` The pattern becomes:
 
@@ -66,7 +67,7 @@ The last lookahead again uses the principle of contrast to check for 0 or more n
 
 Now we have made sure the password is valid, and if that is all we wanted we can stop here. However, if we also wanted to match and return the string, we can easily do so now.
 
-######Matching the string
+#####Matching the string
 
 A simple `.*` would suffice to capture the entire string which, as we have asserted with our lookaheads, matches all of our criteria. The pattern becomes: 
 
@@ -80,7 +81,7 @@ This shows that when checking for n conditions we only need n-1 lookaheads at th
 
 One last thing to note is that, while the order of the lookaheads will not change the result, it is more efficient to use those lookaheads first that are most likely to fail. This makes use of the design to fail principle from the regex style guide.
 
-######Summary Overview
+#####Summary Overview
 
 `^(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)\w{6,10}$`
 
@@ -90,7 +91,7 @@ One last thing to note is that, while the order of the lookaheads will not chang
 4. `(?=\D*\d)`: match 0 or more non digits, then 1 digit.
 5. `\w{6,10}$`: match 6 to 10 word characters and then make sure what follows is the end of the string. This also returns the entire string.
 
-######Example In javascript
+#####Example In javascript
 
 ```javascript
 var valid = "VaLiD123";
@@ -116,7 +117,7 @@ You should definatly read this first before coming back here, as if you dont und
 
 [Regular Expressions - A Beginners Guide](http://codingforeveryone.foundersandcoders.org/JavaScript/regular-expressions-beginners-guide.html)
 
-As for how to extend this tutorial, i would say there are more advanced and complex ways of using lookaheads, even though we do not have lookbehinds in javascript yet (ES7 *fingers crossed), there are many other ways to demonstrate their uses.
+As for how to **extend** this tutorial, i would say there are more advanced and complex ways of using lookaheads, even though we do not have lookbehinds in javascript yet (ES7 *fingers crossed), there are many other ways to demonstrate their uses.
 
 ###References
 
