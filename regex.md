@@ -101,7 +101,7 @@ With 'VaLiD123' as example, let see how the lookaheads work.
 
 `^` as we know will tell the lookahead to start at the beginning of the string.
 
-so '<span style="background-color: #FFFBCC">ssdsddfsdf</span>VaLiD123'
+so '<mark> </mark>VaLiD123'
 
 
 
