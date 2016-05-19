@@ -104,6 +104,30 @@ console.log(regex.test(invalid));
 
 ```
 
+###Regex Tester
+
+This is an excellent testing plattform where you can, for example, enter the regex we have just created and try out differnt passwords, to see what would match. Also i would suggest trying your own lookaheads or at least modify the one we have here to you can see exactly how it works. Be careful however with the way special characters are escaped in this tool compared to how you would write it in javascript. For example `\\n` in regex101.com is `\n` in javascript normally, when you create it in the `var regex = /regexHere/` way.
+
+[regex101.com](https://regex101.com/#javascript)
+
+###Related
+
+You should definatly read this first before coming back here, as if you dont understand the content of the link below, you will probably get lost here.
+
+[Regular Expressions - A Beginners Guide](http://codingforeveryone.foundersandcoders.org/JavaScript/regular-expressions-beginners-guide.html)
+
+As for how to extend this tutorial, i would say there are more advanced and complex ways of using lookaheads, even though we do not have lookbehinds in javascript yet (ES7 *fingers crossed), there are many other ways to demonstrate their uses.
+
+###References
+
+[Mastering Lookahead and Lookbehind](http://www.rexegg.com/regex-lookarounds.html)
+
+[Lookahead and Lookbehind Zero-Length Assertions](http://www.regular-expressions.info/lookaround.html)
+
+[Regular Expressions - MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions)
+
+
+
 
 
 
