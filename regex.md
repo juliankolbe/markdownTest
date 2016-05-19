@@ -85,10 +85,10 @@ One last thing to note is that, while the order of the lookaheads will not chang
 `^(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)\w{6,10}$`
 
 1. `^`: start at the beginning of the string for each lookahead.
-2. `(?=[^a-z]*[a-z])`: from the start, match 0 or more non lowercase letters, then 1 lowercase letter.
-3. `(?=(?:[^A-Z]*[A-Z]){3})`: from the start, do the following 3 times: match 0 or more non uppercase letters, then 1 uppercase letter.
-4. `(?=\D*\d)`: from the start, match 0 or more non digits, then 1 digit.
-5. `\w{6,10}$`: from the start, match 6 to 10 word characters and then make sure we are at the end of the string. This also returns the entire string.
+2. `(?=[^a-z]*[a-z])`: match 0 or more non lowercase letters, then 1 lowercase letter.
+3. `(?=(?:[^A-Z]*[A-Z]){3})`: do the following 3 times: match 0 or more non uppercase letters, then 1 uppercase letter.
+4. `(?=\D*\d)`: match 0 or more non digits, then 1 digit.
+5. `\w{6,10}$`: match 6 to 10 word characters and then make sure we are at the end of the string. This also returns the entire string.
 
 ######Example In javascript
 
