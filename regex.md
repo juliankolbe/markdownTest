@@ -8,7 +8,7 @@
 
 _This is a summarized version from the [Mastering Lookahead and Lookbehind](http://www.rexegg.com/regex-lookarounds.html) article on rexegg.com._
 
-#####Introduction
+###Introduction
 
 Lookaheads in regex is a bit more advanced and can get easily confusing in the beginning, they are however useful for several purposes, including simple string validation. So if you have not used regex at all yet, I advise that you play around with the basics first.
 
@@ -19,6 +19,8 @@ This will all become clear in the following example where we will perform a simp
 We will not be using Negative Lookahead in the example, however it behaves the same way as positive lookaheads do, just with logic being that you 'lookahead' for a pattern not being in the string.
 
 _Note: whenever the [rexex style guide](http://www.rexegg.com/regex-style.html) is mentioned it is referring to the one from rexegg.com._
+
+###Password Example
 
 #####Password requirements:
 
