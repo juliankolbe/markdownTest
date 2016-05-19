@@ -3,7 +3,7 @@
 
 | Symbol 	| Definition    			| Description																			|
 |-----------|---------------------------|---------------------------------------------------------------------------------------|
-| (?=foo)	| Lookahead	  				| Asserts that what immediately follows the current position in the string is foo 		|
+| (?=foo)	| Positive Lookahead	    | Asserts that what immediately follows the current position in the string is foo 		|
 | (?!foo)	| Negative Lookahead   		| Asserts that what immediately follows the current position in the string is not foo 	|
 
 _This is a summarized version from the [Mastering Lookahead and Lookbehind](http://www.rexegg.com/regex-lookarounds.html) article on rexegg.com._
@@ -14,6 +14,8 @@ Lookaheads in regex is a bit more advanced and can get easily confusing in the b
 The important thing to understand about lookaheads is that at the end of a lookahead, the regex engine has not changed its position in the string. This makes it possible to chain several lookaheads, one after the other without changing position.
 
 This will all become clear in the following example where we will perform a simple password validation with just one line of regex, instead of many lines of javascript.
+
+We will not be using Negative Lookahead in the example, however it behaves the same way as positive lookaheads do, just with logic being that you 'lookahead' for a pattern not being in the string.
 
 _Note: whenever the [rexex style guide](http://www.rexegg.com/regex-style.html) is mentioned it is referring to the one from rexegg.com._
 
@@ -29,7 +31,7 @@ _Note: whenever the [rexex style guide](http://www.rexegg.com/regex-style.html) 
 
 A string made up of 6 to 10 characters can be written like this `^\w{6,10}$`. Start at the beginning of the string `^`, match any word character 6 to 10 times `\w{6,10}` and make sure your at the end of the string `$`.
 
-Within a lookahead the pattern becomes `(?=^\w{6,10}$)`, we will however move the `^` to the beginning of the pattern in order not to duplicate it for every lookahead.
+Within a lookahead the pattern becomes `(?=^\w{6,10}$)`, we will however move the `^` to the beginning of the pattern in order not to duplicate it for every lookahead. It is important to realise that our lookaheads here will always look from left to right in the string, and by adding the `^` before the lookaheads we make sure that assertions are started at the very beginning of the string.
 
 `^(?=\w{6,10}$)`
 
@@ -91,6 +93,15 @@ console.log(regex.test(invalid));
 // Outputs: false
 
 ```
+
+
+######The process
+
+With 'VaLiD123' as example, let see how the lookaheads work.
+
+`^` as we know will tell the lookahead to start at the beginning of the string.
+
+so '<span style="background-color: #FFFBCC"> </span>VaLiD123'
 
 
 
