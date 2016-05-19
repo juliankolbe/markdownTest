@@ -22,6 +22,8 @@ _Note: whenever the [rexex style guide](http://www.rexegg.com/regex-style.html) 
 
 ###Password Example
 
+We are creating a password validation regex by going through each step on how to create this regular expression one by one. If at any point you feel like you do not understand something or think that you need more details, refer back to [this](http://www.rexegg.com/regex-lookarounds.html) link to the original article, where it is probably better explained. Just be careful that it is not javascript specific but for many other engines aswell, and some of the code is not compatible.
+
 #####Password requirements:
 
 1. The Password must have between 6 and 10 word characters. `\w`
@@ -113,13 +115,19 @@ This is an excellent testing plattform where you can, for example, enter the reg
 
 [regex101.com](https://regex101.com/#javascript)
 
+###Codewars Practice Kata
+
+[Password validator](http://www.codewars.com/kata/password-validator)
+
+[Regex Password Validation](http://www.codewars.com/kata/regex-password-validation)
+
 ###Related
 
 You should definatly read this first before coming back here, as if you dont understand the content of the link below, you will probably get lost here.
 
 [Regular Expressions - A Beginners Guide](http://codingforeveryone.foundersandcoders.org/JavaScript/regular-expressions-beginners-guide.html)
 
-As for how to **extend** this tutorial, i would say there are more advanced and complex ways of using lookaheads, even though we do not have lookbehinds in javascript yet (ES7 *fingers crossed), there are many other ways to demonstrate their uses.
+As for how to **extend** this tutorial, i would say there are more advanced and complex ways of using lookaheads, even though we do not have lookbehinds in javascript yet (ES7 *fingers crossed), there are many other ways to demonstrate their uses. Another way would be to go the original article of this tutorial and summarize more advanced concepts, though many require lookbehind.
 
 ###References
 
