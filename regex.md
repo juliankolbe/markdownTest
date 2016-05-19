@@ -20,7 +20,7 @@ We will not be using Negative Lookahead in the example, however it behaves the s
 
 _Note: whenever the [rexex style guide](http://www.rexegg.com/regex-style.html) is mentioned it is referring to the one from rexegg.com._
 
-###Password Example
+###Password example
 
 We are creating a password validation regex by going through each step on how to create this regular expression one by one. If at any point you feel like you do not understand something or think that you need more details, refer back to [this](http://www.rexegg.com/regex-lookarounds.html) link to the original article, where it is probably better explained. Just be careful that it is not javascript specific but for many other engines aswell, and some of the code is not compatible.
 
@@ -113,7 +113,7 @@ console.log(regex.test(invalid));
 
 This is an excellent testing plattform where you can, for example, enter the regex we have just created and try out differnt passwords, to see what would match. Also i would suggest trying your own lookaheads or at least modify the one we have here to you can see exactly how it works. Be careful however with the way special characters are escaped in this tool compared to how you would write it in javascript. For example `\\n` in regex101.com is `\n` in javascript normally, when you create it in the `var regex = /regexHere/` way.
 
-[regex101.com](https://regex101.com/#javascript)
+[Regex 101](https://regex101.com/#javascript)
 
 ###Codewars Practice Kata
 
@@ -132,6 +132,8 @@ As for how to **extend** this tutorial, i would say there are more advanced and 
 ###References
 
 [Mastering Lookahead and Lookbehind](http://www.rexegg.com/regex-lookarounds.html)
+
+[Regex Style Guide](http://www.rexegg.com/regex-style.html)
 
 [Lookahead and Lookbehind Zero-Length Assertions](http://www.regular-expressions.info/lookaround.html)
 
