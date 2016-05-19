@@ -29,9 +29,9 @@ _Note: whenever the [rexex style guide](http://www.rexegg.com/regex-style.html) 
 
 ######Starting with the first requirement
 
-A string made up of 6 to 10 characters can be written like this `^\w{6,10}$`. Start at the beginning of the string `^`, match any word character 6 to 10 times `\w{6,10}` and make sure your at the end of the string `$`.
+A string made up of 6 to 10 characters can be written like this `^\w{6,10}$`. Start at the beginning of the string `^`, match any word character 6 to 10 times `\w{6,10}` and make sure that after those 6 to 10 letters follows the end of the string `$`.
 
-Within a lookahead the pattern becomes `(?=^\w{6,10}$)`, we will however move the `^` to the beginning of the pattern in order not to duplicate it for every lookahead. It is important to realise that our lookaheads here will always look from left to right in the string, and by adding the `^` before the lookaheads we make sure that assertions are started at the very beginning of the string.
+Within a lookahead the pattern becomes `(?=^\w{6,10}$)`, we will however move the `^` to the beginning of the pattern in order not to duplicate it for every lookahead, as we will always want our lookaheads to start at the beginning of the string, moving from left to right.
 
 `^(?=\w{6,10}$)`
 
@@ -42,7 +42,7 @@ This expression validates that a string is 6 to 10 characters, it does however n
 We now have to check whether the password contains a lowercase letter. The easy way to check this would be to use `(?=.*[a-z])`, this is however inefficient due to backtracking.
 
 Instead we will use an expression that makes use of the principle of contrast recommended by the regex style guide. The expression looks like this `[^a-z]*[a-z]`,
-`[^a-z]` is the counterclass to `[a-z]`. So the expression above is saying: match 0 or more non lowercase letters and one lowercase letter. The pattern becomes:
+`[^a-z]` is the counterclass to `[a-z]`. So the expression above is saying: from the start of the string match 0 or more non lowercase letters and one lowercase letter. The pattern becomes:
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])`
 
@@ -54,7 +54,7 @@ We will do this using the quantifier `{3}`.
 The lookahead will look like this: `(?=(?:[^A-Z]*[A-Z]){3})`.
 _Note: `(:?)` means non capturing group, it is similar to `()`, just that it does not return the capture in the results._
 
-So this lookahead will do the following three times: match zero or more characters that are not uppercase letters `[^A-Z]*`, then match one uppercase letter `[A-Z]`. The pattern becomes:
+So this lookahead will do the following three times: from the beginning of the string match zero or more characters that are not uppercase letters `[^A-Z]*`, then match one uppercase letter `[A-Z]`. The pattern becomes:
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})`
 
@@ -68,17 +68,27 @@ Now we have made sure the password is valid, and if that is all we wanted we can
 
 ######Matching the string
 
-A simple `.*` would suffice to capture the entire string which, as we have asserted with out lookups, matches all of our criteria. The pattern becomes: 
+A simple `.*` would suffice to capture the entire string which, as we have asserted with our lookaheads, matches all of our criteria. The pattern becomes: 
 
 `^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d).*`
 
-However, to make the pattern even more efficient we can use one of the patterns from the lookaheads to match the entire string. Which one does not matter as it can work with any, but the obvious one here would be `\w{6,10}$`, as it matches the entire string anyway. The pattern becomes: 
+However, to make the pattern more efficient we can use one of the patterns from the lookaheads to match the entire string. Which one does not matter as it can work with any, but the obvious one here would be `\w{6,10}$`, as it matches the entire string anyway. The pattern becomes: 
 
 `^(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)\w{6,10}$`
 
 This shows that when checking for n conditions we only need n-1 lookaheads at the most, often you can combine several conditions into a single lookahead.
 
 One last thing to note is that, while the order of the lookaheads will not change the result, it is more efficient to use those lookaheads first that are most likely to fail. This makes use of the design to fail principle from the regex style guide.
+
+######Summary Overview
+
+`^(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)\w{6,10}$`
+
+1. `^`: start at the beginning of the string for each lookahead.
+2. `(?=[^a-z]*[a-z])`: from the start, match 0 or more non lowercase letters, then 1 lowercase letter.
+3. (?=(?:[^A-Z]*[A-Z]){3}): from the start, do the following 3 times: match 0 or more non uppercase letters, then 1 uppercase letter.
+4. `(?=\D*\d)`: from the start, match 0 or more non digits, then 1 digit.
+5. `\w{6,10}$`: from the start, match 6 to 10 word characters and then make sure we are at the end of the string. This also returns the entire string.
 
 ######Example In javascript
 
